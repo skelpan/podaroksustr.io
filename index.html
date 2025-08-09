@@ -2,19 +2,26 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Для Анастасии - С ДР!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title> С ДР!</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat:wght@300;400;600&display=swap');
         
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
             font-family: 'Montserrat', sans-serif;
             overflow: hidden;
             height: 100vh;
+            width: 100vw;
             background: #1a0a22;
             color: white;
+            touch-action: manipulation;
         }
 
         .container {
@@ -26,15 +33,18 @@
             justify-content: center;
             align-items: center;
             z-index: 10;
+            padding: 20px;
         }
 
         h1 {
             font-family: 'Marck Script', cursive;
-            font-size: 5rem;
+            font-size: 3rem;
             color: #F78FB3;
             text-shadow: 0 0 15px rgba(247, 143, 179, 0.7);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             animation: glow 2s infinite alternate;
+            text-align: center;
+            word-break: break-word;
         }
 
         @keyframes glow {
@@ -46,25 +56,22 @@
             background: linear-gradient(45deg, #9B59B6, #F78FB3);
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 1.2rem;
+            padding: 12px 24px;
+            font-size: 1rem;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 2rem;
-            box-shadow: 0 5px 20px rgba(155, 89, 182, 0.5);
+            margin-top: 1.5rem;
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.5);
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
             z-index: 1;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(155, 89, 182, 0.7);
+            width: 80%;
+            max-width: 300px;
         }
 
         .btn:active {
-            transform: translateY(1px);
+            transform: translateY(2px);
         }
 
         .btn::after {
@@ -80,11 +87,11 @@
             transition: opacity 0.3s;
         }
 
-        .btn:hover::after {
+        .btn:active::after {
             opacity: 1;
         }
 
-        /* Анимации фона */
+        /* Оптимизированные анимации фона */
         .lines-container {
             position: absolute;
             top: 0;
@@ -93,6 +100,7 @@
             height: 100%;
             z-index: 0;
             overflow: hidden;
+            will-change: transform;
         }
 
         .line {
@@ -102,6 +110,7 @@
             filter: blur(1px);
             opacity: 0.6;
             animation: flow 20s linear infinite;
+            will-change: transform;
         }
 
         @keyframes flow {
@@ -115,11 +124,12 @@
             border-radius: 50%;
             filter: blur(1px);
             animation: float 5s infinite ease-in-out;
+            will-change: transform, opacity;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0) scale(0.8); opacity: 0.3; }
-            50% { transform: translateY(-20px) scale(1.2); opacity: 0.8; }
+            50% { transform: translateY(-10px) scale(1.1); opacity: 0.8; }
         }
 
         /* Экран с пожеланием */
@@ -136,18 +146,20 @@
             background: linear-gradient(135deg, rgba(155, 89, 182, 0.9) 0%, rgba(247, 143, 179, 0.9) 100%);
             opacity: 0;
             pointer-events: none;
-            transition: opacity 1s;
+            transition: opacity 0.5s;
             z-index: 5;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .wish-text {
-            max-width: 600px;
-            font-size: 1.5rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
+            max-width: 90%;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 1s;
+            transition: all 0.8s;
         }
 
         /* Секретная кнопка */
@@ -158,22 +170,24 @@
             padding: 10px 20px;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             transition: all 0.3s;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 1s 0.5s;
+            transition: all 0.8s 0.3s;
+            width: 80%;
+            max-width: 250px;
         }
 
-        .secret-btn:hover {
+        .secret-btn:active {
             background: rgba(255, 255, 255, 0.1);
         }
 
         .hidden-wish {
-            max-width: 600px;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-top: 2rem;
+            max-width: 90%;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-top: 1rem;
             opacity: 0;
             height: 0;
             overflow: hidden;
@@ -193,8 +207,10 @@
             background: linear-gradient(135deg, rgba(25, 10, 40, 0.95) 0%, rgba(50, 15, 70, 0.95) 100%);
             opacity: 0;
             pointer-events: none;
-            transition: opacity 1s;
+            transition: opacity 0.5s;
             z-index: 10;
+            padding: 20px;
+            text-align: center;
         }
 
         .star {
@@ -202,11 +218,54 @@
             background: white;
             border-radius: 50%;
             animation: twinkle 2s infinite alternate;
+            will-change: transform, opacity;
         }
 
         @keyframes twinkle {
             0% { opacity: 0.3; transform: scale(0.8); }
-            100% { opacity: 0.8; transform: scale(1.2); }
+            100% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        /* Медиа-запросы для разных размеров экранов */
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 4rem;
+            }
+            
+            .btn {
+                font-size: 1.2rem;
+                padding: 15px 30px;
+            }
+            
+            .wish-text {
+                font-size: 1.3rem;
+            }
+            
+            .secret-btn {
+                font-size: 1.1rem;
+            }
+            
+            .hidden-wish {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-height: 600px) {
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .btn {
+                margin-top: 1rem;
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .wish-text {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
         }
     </style>
 </head>
@@ -243,23 +302,30 @@
     </div>
 
     <script>
-        // Создаем анимированные элементы фона
-        function createBackground() {
+        // Оптимизированная версия для мобильных
+        document.addEventListener('DOMContentLoaded', function() {
+            // Создаем анимированные элементы фона
             const container = document.getElementById('lines');
             const colors = ['rgba(155, 89, 182, 0.5)', 'rgba(247, 143, 179, 0.5)', 'rgba(255, 215, 0, 0.5)'];
             
-            // Создаем линии
-            for (let i = 0; i < 20; i++) {
+            // Уменьшаем количество элементов для мобильных
+            const isMobile = window.innerWidth < 768;
+            const lineCount = isMobile ? 12 : 20;
+            const particleCount = isMobile ? 30 : 50;
+            const starCount = isMobile ? 50 : 100;
+            
+            // Линии
+            for (let i = 0; i < lineCount; i++) {
                 const line = document.createElement('div');
                 line.className = 'line';
                 
-                const width = Math.random() * 300 + 100;
-                const height = Math.random() * 4 + 1;
+                const width = Math.random() * 200 + 50;
+                const height = Math.random() * 3 + 1;
                 const left = Math.random() * window.innerWidth;
                 const top = Math.random() * window.innerHeight;
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 const rotation = Math.random() * 180;
-                const duration = Math.random() * 20 + 10;
+                const duration = Math.random() * 15 + 10;
                 const delay = Math.random() * -20;
                 
                 line.style.cssText = `
@@ -276,16 +342,16 @@
                 container.appendChild(line);
             }
             
-            // Создаем частички
-            for (let i = 0; i < 50; i++) {
+            // Частички
+            for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 
-                const size = Math.random() * 5 + 2;
+                const size = Math.random() * 4 + 1;
                 const left = Math.random() * 100;
                 const top = Math.random() * 100;
                 const delay = Math.random() * 5;
-                const duration = Math.random() * 5 + 3;
+                const duration = Math.random() * 4 + 3;
                 
                 particle.style.cssText = `
                     width: ${size}px;
@@ -298,21 +364,19 @@
                 
                 container.appendChild(particle);
             }
-        }
-        
-        // Создаем звезды для финального экрана
-        function createStars() {
-            const container = document.getElementById('finalScreen');
             
-            for (let i = 0; i < 100; i++) {
+            // Звезды для финального экрана
+            const finalScreen = document.getElementById('finalScreen');
+            
+            for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 
-                const size = Math.random() * 3 + 1;
+                const size = Math.random() * 2 + 1;
                 const left = Math.random() * 100;
                 const top = Math.random() * 100;
                 const delay = Math.random() * 2;
-                const duration = Math.random() * 3 + 1;
+                const duration = Math.random() * 2 + 1;
                 const opacity = Math.random() * 0.7 + 0.3;
                 
                 star.style.cssText = `
@@ -325,21 +389,15 @@
                     animation-duration: ${duration}s;
                 `;
                 
-                container.appendChild(star);
+                finalScreen.appendChild(star);
             }
-        }
-        
-        // Инициализация
-        document.addEventListener('DOMContentLoaded', function() {
-            createBackground();
-            createStars();
             
+            // Обработчики событий
             const openBtn = document.getElementById('openBtn');
             const wishScreen = document.getElementById('wishScreen');
             const wishText = document.querySelector('.wish-text');
             const secretBtn = document.getElementById('secretBtn');
             const hiddenWish = document.getElementById('hiddenWish');
-            const finalScreen = document.getElementById('finalScreen');
             
             // Открытие поздравления
             openBtn.addEventListener('click', function() {
@@ -356,7 +414,7 @@
                         secretBtn.style.opacity = '1';
                         secretBtn.style.transform = 'translateY(0)';
                     }, 300);
-                }, 500);
+                }, 300);
                 
                 // Автопереход на финальный экран через 30 сек
                 setTimeout(() => {
@@ -364,9 +422,9 @@
                     wishScreen.style.pointerEvents = 'none';
                     
                     setTimeout(() => {
-                        finalScreen.style.opacity = '1';
-                        finalScreen.style.pointerEvents = 'auto';
-                    }, 500);
+                        document.getElementById('finalScreen').style.opacity = '1';
+                        document.getElementById('finalScreen').style.pointerEvents = 'auto';
+                    }, 300);
                 }, 30000);
             });
             
@@ -381,9 +439,25 @@
                     hiddenWish.style.height = '0';
                     hiddenWish.style.opacity = '0';
                     hiddenWish.style.marginTop = '0';
-                    this.textContent = 'Для тебя, Систр 💜';
+                    this.textContent = 'Для тебя, Настюша 💜';
                 }
             });
+            
+            // Предотвращение масштабирования на iOS
+            document.addEventListener('gesturestart', function(e) {
+                e.preventDefault();
+            });
+        });
+        
+        // Оптимизация для мобильных устройств
+        window.addEventListener('load', function() {
+            // Уменьшаем количество анимаций при слабой производительности
+            if ('connection' in navigator && navigator.connection.saveData) {
+                const elements = document.querySelectorAll('.line, .particle');
+                for (let i = 0; i < elements.length; i += 2) {
+                    elements[i].style.display = 'none';
+                }
+            }
         });
     </script>
 </body>
