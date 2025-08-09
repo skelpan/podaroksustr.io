@@ -1,0 +1,230 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    background: linear-gradient(135deg, #2c0e3a 0%, #1a0a22 100%);
+    color: white;
+    position: relative;
+}
+
+/* Анимированный фон с линиями */
+.lines-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.line {
+    position: absolute;
+    background: transparent;
+    border-radius: 50px;
+    filter: blur(1px);
+    opacity: 0.7;
+}
+
+/* Частички-светлячки */
+.particle {
+    position: absolute;
+    background: rgba(255, 215, 0, 0.7);
+    border-radius: 50%;
+    filter: blur(1px);
+    animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.3; transform: scale(0.8); }
+    100% { opacity: 0.8; transform: scale(1.2); }
+}
+
+/* Главный экран */
+.main-screen {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    transition: opacity 1s;
+}
+
+h1 {
+    font-size: 5rem;
+    margin-bottom: 2rem;
+    color: #F78FB3;
+    text-shadow: 0 0 10px rgba(247, 143, 179, 0.5);
+    font-family: 'Marck Script', cursive;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px rgba(247, 143, 179, 0.5); }
+    to { text-shadow: 0 0 20px rgba(247, 143, 179, 0.8), 0 0 30px rgba(155, 89, 182, 0.6); }
+}
+
+.btn {
+    background: linear-gradient(45deg, #9B59B6, #F78FB3);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 2rem;
+    box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(155, 89, 182, 0.6);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #F78FB3, #9B59B6);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.btn:hover::after {
+    opacity: 1;
+}
+
+/* Экран с пожеланием */
+.wish-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(155, 89, 182, 0.9) 0%, rgba(247, 143, 179, 0.9) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s;
+    z-index: 2;
+}
+
+.wish-text {
+    max-width: 600px;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s;
+}
+
+.secret-btn {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s 0.5s;
+}
+
+.secret-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.hidden-wish {
+    max-width: 600px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-top: 2rem;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.5s;
+    font-style: italic;
+}
+
+/* Финальный экран */
+.final-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(25, 10, 40, 0.95) 0%, rgba(50, 15, 70, 0.95) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s;
+    z-index: 3;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+.thank-you {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    z-index: 1;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3rem;
+    }
+    
+    .wish-text {
+        font-size: 1.2rem;
+    }
+}
